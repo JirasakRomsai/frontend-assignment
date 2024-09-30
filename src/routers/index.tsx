@@ -2,7 +2,7 @@ import { Suspense, lazy } from 'react';
 import { createBrowserRouter, useParams } from 'react-router-dom';
 
 const HomePage = lazy(() => import('../pages/Home'));
-const AssignmentIndexPage = lazy(() => import('../pages/assignment/index'));
+const AssignmentIndexPage = lazy(() => import('../pages/assignment/Index'));
 const LoadingComponent = lazy(() => import('../components/Loading'));
 
 const AssignmentWrapper = () => {

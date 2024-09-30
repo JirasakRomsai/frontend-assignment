@@ -4,53 +4,6 @@ import { IDepartmentGroupSummary, IUser, } from './model/UserModel';
 
 
 function Assignment2Page() {
-    /*  const summary = {
-         [userData.company.department]: {
-           male: gender === "male" ? 1 : 0,
-           female: gender === "female" ? 1 : 0,
-           ageRange: `${Math.floor(age / 10) * 10}-${Math.ceil(age / 10) * 10}`, // Range
-           hair: {
-             Black: hair.color === "Black" ? 1 : 0,
-             Blond: hair.color === "Blond" ? 1 : 0,
-             Chestnut: hair.color === "Chestnut" ? 1 : 0,
-             Brown: hair.color === "Brown" ? 1 : 0
-           },
-           addressUser: {
-             [`${firstName}${lastName}`]: address.postalCode
-           }
-         }
-       }; */
-    /*  const [departmentState, setDepartmentState] = useState<IDepartmentGroupSummary>({
-         HR: {
-             male: 5,
-             female: 3,
-             ageRange: "25-35",
-             hair: {
-                 Black: 2,
-                 Blond: 1,
-                 Chestnut: 2,
-                 Brown: 3,
-             },
-             addressUser: {
-                 TerryMedhurst: "XXXXX",
-             },
-         },
-         Engineering: {
-             male: 8,
-             female: 2,
-             ageRange: "30-40",
-             hair: {
-                 Black: 3,
-                 Blond: 2,
-                 Chestnut: 2,
-                 Brown: 1,
-             },
-             addressUser: {
-                 JohnDoe: "YYYYY",
-             },
-         },
-     }); */
-
     const [data, setData] = useState<Array<IUser> | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<Error | null>(null);
@@ -97,12 +50,10 @@ function Assignment2Page() {
 
         });
 
-        console.log("summary complete", summary);
-
         return summary;
     };
 
-    const items = useMemo(() => {
+    const itemsTransform = useMemo(() => {
         if (!data || data.length === 0) {
             return [];
         }
@@ -112,26 +63,31 @@ function Assignment2Page() {
 
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await api.get<any>('/users'); // เรียก API endpoint
-
-                setData(response.data.users);
-            } catch (err) {
-                setError(err as Error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchData();
     }, []);
+
+
+    const fetchData = async () => {
+        try {
+            const response = await api.get<any>('/users'); // เรียก API endpoint
+
+            setData(response.data.users);
+        } catch (err) {
+            setError(err as Error);
+        } finally {
+            setLoading(false);
+        }
+        console.log("fetchData");
+
+    };
+
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
 
     return (
         <div>
+            <button onClick={() => setData(null)}> change </button>
             <h1>Data from API:</h1>
             <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>

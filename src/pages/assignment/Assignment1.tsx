@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Box from '../../components/Box';
 import Column from '../../components/Column';
 import { Col, Row } from 'antd';
@@ -89,7 +89,7 @@ function Assignment1Page() {
                             </Row>
                             <div>
                                 {listGroupNew.filter(item => item.type === 1).map((item, idx) => (
-                                    <Box key={idx} props={{ name: item.name, styles: { border: '1px solid black', margin: '15px' } }}
+                                    <Box key={idx} props={{ name: item.name, enableMouseHover: true, styles: { border: '1px solid black', margin: '15px' } }}
                                         onClickAction={() => onClickActionSwap("Remove", item, ETypeFruitVegetable.Fruit)} />
                                 ))}
                             </div>
@@ -106,7 +106,7 @@ function Assignment1Page() {
                             </Row>
                             <div>
                                 {listGroupNew.filter(item => item.type === 2).map((item, idx) => (
-                                    <Box key={idx} props={{ name: item.name, styles: { border: '1px solid black', margin: '15px' } }}
+                                    <Box key={idx} props={{ name: item.name, enableMouseHover:true, styles: { border: '1px solid black', margin: '15px' } }}
                                         onClickAction={() => onClickActionSwap("Remove", item, ETypeFruitVegetable.Vegetable)} />
                                 ))}
                             </div>

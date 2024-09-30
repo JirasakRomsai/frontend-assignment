@@ -50,6 +50,9 @@ function Assignment2Page() {
 
         });
 
+        console.log("summary",summary);
+        
+
         return summary;
     };
 
@@ -77,8 +80,6 @@ function Assignment2Page() {
         } finally {
             setLoading(false);
         }
-        console.log("fetchData");
-
     };
 
 
@@ -87,7 +88,6 @@ function Assignment2Page() {
 
     return (
         <div>
-            <button onClick={() => setData(null)}> change </button>
             <h1>Data from API:</h1>
             <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>

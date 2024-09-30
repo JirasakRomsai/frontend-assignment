@@ -24,7 +24,7 @@ function Assignment1Page() {
     const filterGroups = (item: IFruitVegetable) => {
         setListGroupNew(prevList => [...prevList, item]);
         listMixRef.current = listMixRef.current.filter(mixItem => mixItem.name !== item.name);
-        
+
         moveBack(item);
     };
 
@@ -47,16 +47,16 @@ function Assignment1Page() {
         const id = setInterval(() => {
 
             const exists = listMixRef.current.some(item => item.name === itemMove.name);
-            
+
             if (!exists) {
                 listMixRef.current.push(itemMove);
                 setListGroupNew(prev => prev.filter(i => i.name !== itemMove.name));
-            } 
-            clearInterval(id); 
+            }
+            clearInterval(id);
         }, 5000);
-        
+
     };
-    
+
     const onClickActionSwap = (action: string, item: IFruitVegetable, groupType: number = 0) => {
         if (action === "Add") {
             filterGroups(item);
@@ -69,28 +69,28 @@ function Assignment1Page() {
         <div>
             <Row gutter={[16, 0]}>
                 <Col span={8}>
-                  <Row gutter={[0, 12]}>
-                    {listMixRef.current.map((item, idx) => (
-                      <Col span={24} style={{padding:"0px 10% 0px 10%"}}>
-                       <Box key={idx} props={{ name: item.name,  enableMouseHover: true, styles: { border: '1px solid black', backgroundColor:'lightblue' } }} 
-                              onClickAction={() => onClickActionSwap("Add", item)} 
-                              />
-                      </Col>
-                      ))}
-                  </Row>
+                    <Row gutter={[0, 12]}>
+                        {listMixRef.current.map((item, idx) => (
+                            <Col key={idx} span={24} style={{ padding: "0px 10% 0px 10%" }}>
+                                <Box props={{ name: item.name, enableMouseHover: true, styles: { border: '1px solid black', backgroundColor: 'lightblue' } }}
+                                    onClickAction={() => onClickActionSwap("Add", item)}
+                                />
+                            </Col>
+                        ))}
+                    </Row>
                 </Col>
                 <Col span={8}>
                     <Column>
-                        <Col span={24} style={{padding:'0px'}}>
-                          <Row style={{backgroundColor:'#c5c6c7'}}>
-                            <Col span={24}>
-                              <Box props={{ name: 'Fruit', styles: { borderBottom: '1px solid black' } }} />
-                            </Col>
-                          </Row>
+                        <Col span={24} style={{ padding: '0px' }}>
+                            <Row style={{ backgroundColor: '#c5c6c7' }}>
+                                <Col span={24}>
+                                    <Box props={{ name: 'Fruit', styles: { borderBottom: '1px solid black' } }} />
+                                </Col>
+                            </Row>
                             <div>
                                 {listGroupNew.filter(item => item.type === 1).map((item, idx) => (
-                                    <Box key={idx} props={{ name: item.name, styles: { border: '1px solid black', margin:'15px' } }}  
-                                      onClickAction={() => onClickActionSwap("Remove", item, ETypeFruitVegetable.Fruit)} />
+                                    <Box key={idx} props={{ name: item.name, styles: { border: '1px solid black', margin: '15px' } }}
+                                        onClickAction={() => onClickActionSwap("Remove", item, ETypeFruitVegetable.Fruit)} />
                                 ))}
                             </div>
                         </Col>
@@ -98,16 +98,16 @@ function Assignment1Page() {
                 </Col>
                 <Col span={8}>
                     <Column>
-                        <Col span={24} style={{padding:'0px'}}>
-                        <Row style={{backgroundColor:'#c5c6c7'}}>
-                            <Col span={24}>
-                              <Box props={{ name: 'Vegatables', styles: { borderBottom: '1px solid black' } }} />
-                            </Col>
-                          </Row>
+                        <Col span={24} style={{ padding: '0px' }}>
+                            <Row style={{ backgroundColor: '#c5c6c7' }}>
+                                <Col span={24}>
+                                    <Box props={{ name: 'Vegatables', styles: { borderBottom: '1px solid black' } }} />
+                                </Col>
+                            </Row>
                             <div>
                                 {listGroupNew.filter(item => item.type === 2).map((item, idx) => (
-                                    <Box key={idx} props={{ name: item.name, styles: { border: '1px solid black', margin:'15px' } }} 
-                                      onClickAction={() => onClickActionSwap("Remove", item, ETypeFruitVegetable.Vegetable)} />
+                                    <Box key={idx} props={{ name: item.name, styles: { border: '1px solid black', margin: '15px' } }}
+                                        onClickAction={() => onClickActionSwap("Remove", item, ETypeFruitVegetable.Vegetable)} />
                                 ))}
                             </div>
                         </Col>
@@ -120,13 +120,13 @@ function Assignment1Page() {
 
 
 interface IFruitVegetable {
-  name: string;
-  type: ETypeFruitVegetable;
+    name: string;
+    type: ETypeFruitVegetable;
 }
 
 enum ETypeFruitVegetable {
-  Fruit = 1,
-  Vegetable = 2,
+    Fruit = 1,
+    Vegetable = 2,
 }
 
 export default Assignment1Page;

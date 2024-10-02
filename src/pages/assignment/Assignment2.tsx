@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { api } from '../../plugins/api';
 import { IDepartmentGroupSummary, IUser, } from './model/UserModel';
+import { json } from 'react-router-dom';
 
 
 function Assignment2Page() {
@@ -50,13 +51,10 @@ function Assignment2Page() {
 
         });
 
-        console.log("summary",summary);
-        
-
         return summary;
     };
 
-    const itemsTransform = useMemo(() => {
+    const itemsTransform: IDepartmentGroupSummary | [] = useMemo(() => {
         if (!data || data.length === 0) {
             return [];
         }
@@ -86,10 +84,17 @@ function Assignment2Page() {
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
 
+    console.log("itemsTransform ",itemsTransform);
+    
+
     return (
         <div>
             <h1>Data from API:</h1>
-            <pre>{JSON.stringify(data, null, 2)}</pre>
+            {Object.entries(itemsTransform).map(([key, value])=>(
+                 <div key={key}>
+                 <b>{key}:</b> {JSON.stringify(value)}
+               </div>
+            ))}
         </div>
     );
 }
